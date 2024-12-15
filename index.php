@@ -26,8 +26,8 @@
 
         <section class="general">
             <div class="content">
-                <h1>BloggerPress</h1>
-                <p>Your gateway to sharing stories, ideas, and creativity. Start blogging today with our simple, intuitive platform that puts you in control of your voice.</p>
+                <h1>BloggerP <span class="gnr">ress</span></h1>
+                <p><b><span>Your</span></b> gateway to sharing stories, ideas, and creativity. Start blogging today with our simple, intuitive platform that puts you in control of your voice.</p>
                 <a href="sign.php" class="btn">Start Writing</a>
             </div>
             <div class="image">
@@ -45,29 +45,29 @@
                 </p>
                 <button class="btnblog">View More</button>
                 <h3>Writed By :</h3>
-                <p class="author">James Fr</p>
+                <p class="author">Abdelkouddous</p>
             </div>
             <div class="blogs">
                 <img src="images/travel-blogger-800x450.jpg" alt="">
-                <h2>The world in 2100</h2>
+                <h2>Trip Familly</h2>
                 <p class="textb">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate 
                     esse officiis ad eligendi consequatur? Eaque ipsam recusandae 
                     nam consectetur! Vel natus amet quisquam doloribus facere ...
                 </p>
                 <button class="btnblog">View More</button>
                 <h3>Writed By :</h3>
-                <p class="author">James Fr</p>
+                <p class="author">Abdelkouddous</p>
             </div>
             <div class="blogs">
                 <img src="images/travel-blogger-800x450.jpg" alt="">
-                <h2>The world in 2100</h2>
+                <h2>Ai Vs Human</h2>
                 <p class="textb">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate 
                     esse officiis ad eligendi consequatur? Eaque ipsam recusandae 
                     nam consectetur! Vel natus amet quisquam doloribus facere ...
                 </p>
                 <button class="btnblog">View More</button>
                 <h3>Writed By :</h3>
-                <p class="author">James Fr</p>
+                <p class="author">Abdelkouddous</p>
             </div>
         </section>
         <section class="container2">
@@ -80,7 +80,7 @@
                 </p>
                 <button class="btnblog">View More</button>
                 <h3>Writed By :</h3>
-                <p class="author">James Fr</p>
+                <p class="author">Abdelkouddous</p>
             </div>
             <div class="blogs">
                 <img src="images/travel-blogger-800x450.jpg" alt="">
@@ -91,7 +91,7 @@
                 </p>
                 <button class="btnblog">View More</button>
                 <h3>Writed By :</h3>
-                <p class="author">James Fr</p>
+                <p class="author">Abdelkouddous</p>
             </div>
             <div class="blogs">
                 <img src="images/travel-blogger-800x450.jpg" alt="">
@@ -102,7 +102,7 @@
                 </p>
                 <button class="btnblog">View More</button>
                 <h3>Writed By :</h3>
-                <p class="author">James Fr</p>
+                <p class="author">Abdelkouddous</p>
             </div>
         </section>
     </main>
