@@ -1,5 +1,4 @@
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -60,29 +59,34 @@ nav {
     background-color: #0288d1;
     transition: background-color 0.3s;
 }
+
 a {
-    text-decoration: none; 
+    text-decoration: none;
     color: inherit;
-    
+
 }
-.container1{
+
+.container1 {
     display: flex;
     justify-content: space-between;
     width: 80%;
     margin: 25px auto;
 }
-.blogs{
+
+.blogs {
     width: 320px;
     height: 450px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     padding: 15px;
 }
-.container2{
+
+.container2 {
     display: flex;
     justify-content: space-between;
     width: 80%;
     margin: 25px auto;
 }
+
 .general {
     display: flex;
     align-items: center;
@@ -96,15 +100,17 @@ a {
     width: 70%;
     height: 410px;
 }
-.content .gnr{
+
+.content .gnr {
     color: white;
     font-size: 3rem;
 }
+
 .content h1 {
     font-size: 2.8rem;
     color: #333333;
     margin-bottom: 10px;
-    
+
 }
 
 .content p {
@@ -137,15 +143,20 @@ a {
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
+
 .blogs img {
     width: 80%;
     margin-left: 25px;
 }
-.blogs h2 ,h3 , .textb{
+
+.blogs h2,
+h3,
+.textb {
     color: #2B2C28;
     line-height: 30px;
     margin: 5px;
 }
+
 .btnblog {
     margin-left: 70%;
     background-color: #007BFF;
@@ -158,20 +169,23 @@ a {
     transition: background-color 0.3s;
 }
 
-.btnblog:hover { 
+.btnblog:hover {
     background-color: #0056b3;
 }
-.author{
+
+.author {
     color: #2B2C28;
-    float:right;
+    float: right;
     margin-top: -28px;
 }
-.blogs img{
+
+.blogs img {
     border-radius: 50%;
     width: 150px;
     margin-left: 50px;
 }
-.content span{
+
+.content span {
     color: #4caf50;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.5rem;

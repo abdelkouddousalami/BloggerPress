@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="sign.css">
 </head>
 <body>
-<video autoplay muted loop id="background-video">
+    <video autoplay muted loop id="background-video">
         <source src="images/20422317-hd_1920_1080_25fps.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-<nav>
+    <nav>
         <div class="logo">
             <img src="images/bloglogo-removebg-preview_1.jpg" alt="">
         </div>

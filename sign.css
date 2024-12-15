@@ -11,7 +11,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 90vh;
     z-index: 1;
     position: relative;
     gap: 200px;
@@ -31,9 +31,9 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: white;
     color: #000000;
     padding: 10px 20px;
+    font-size: 1.8rem;
     position: sticky;
     top: 0;
     z-index: 1000;
