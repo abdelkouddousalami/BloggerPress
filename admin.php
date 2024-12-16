@@ -1,64 +1,41 @@
+<?php
+    session_start();
+    $name = $_SESSION['name'];
+    $email = $_SESSION['email'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Author Profile</title>
-    <link rel="stylesheet" href="admin.css">
+    <title>Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<nav>
-        <div class="logo">
-            <img src="images/bloglogo-removebg-preview_1.jpg" alt="">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-32 flex items-center justify-center">
+            <div class="h-24 w-24 bg-white border-4 border-white rounded-full overflow-hidden shadow-md">
+                <img src="https://via.placeholder.com/150" alt="Profile Image" class="object-cover w-full h-full">
+            </div>
         </div>
-        <ul class="nav-links">
-            <a href="index.php">
-                <li>Home</li>
-            </a>
-            <li>About</li>
-            <li>Contact</li>
-        </ul>
-        <a href="sign.php">
-            <div class="login">
-                Author Area
+        <div class="p-6">
+            <h2 class="text-center text-2xl font-semibold text-gray-800"><?php echo "$name";?></h2>
+            <p class="text-center text-gray-600">Full Stack Developer</p>
+
+            <div class="mt-6">
+                <p class="text-gray-700 text-sm">Email: <span class="font-medium"><?php echo "$email";?></span></p>
+                <p class="text-gray-700 text-sm">Phone: <span class="font-medium">0600000</span></p>
+                <p class="text-gray-700 text-sm">Location: <span class="font-medium">nadoor</span></p>
             </div>
-        </a>
-    </nav>
-    <main>
-        <section class="profile">
-            <div class="info">
-                <h5>Abdelkouddous</h5>
+
+            <div class="mt-6 flex justify-center">
+                <a href="dashbaord.php" class="px-4 py-2 bg-indigo-500 text-white font-semibold rounded hover:bg-indigo-600 transition duration-200">
+                    Access Dashboard
+                </a>
             </div>
-            <div class="region">
-                <h5>Morocco</h5>
-            </div>
-            <div class="number">
-                <h5>Total Article : 01</h5>
-            </div>
-        </section>
-        <section class="statistic">
-            <div class="first">
-                <div class="Gere">
-                    <h3>Gestion des articles</h3>
-                    <button>View votre Article</button>
-                </div>
-                <div class="Gere">
-                <h3>Statistiques des articles</h3>
-                <button>View votre Statistiques</button>
-                </div>
-            </div>
-            <div class="second">
-                <div class="Gere">
-                <h3>View More Article</h3>
-                <button>Home</button>
-                </div>
-                <div class="Gere">
-                <h3>Déconnexion</h3>
-                <button>Au revoire</button>
-                </div>
-            </div>
-        </section>
-    </main>
-    
+        </div>
+    </div>
 </body>
 </html>

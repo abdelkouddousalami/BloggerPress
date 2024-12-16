@@ -34,14 +34,14 @@
         </div>
         <div class="container" id="auth-container">
             <h1 id="form-title">Sign In</h1>
-            <form id="auth-form">
+            <form id="auth-form" action="connect.php" method="post">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" name="password" required>
                 </div>
                 <button type="submit" class="btn">Sign In</button>
             </form>
