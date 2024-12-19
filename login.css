@@ -169,3 +169,22 @@ a {
     text-decoration: underline;
     cursor: pointer;
 }
+select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    border-color: #4caf50;
+    outline: none;
+    background-color: #e8f5e9;
+}
+
+option {
+    padding: 10px;
+}

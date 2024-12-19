@@ -1,10 +1,7 @@
--- Create the database
 CREATE DATABASE BloggerPress;
 
--- Use the database
 USE BloggerPress;
 
--- Create Users Table
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
@@ -15,7 +12,6 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Create Articles Table
 CREATE TABLE articles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -30,7 +26,6 @@ CREATE TABLE articles (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Create Stats Table
 CREATE TABLE stats (
     id INT AUTO_INCREMENT PRIMARY KEY,
     article_id INT NOT NULL,
@@ -40,7 +35,6 @@ CREATE TABLE stats (
     FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE
 );
 
--- Create Article Views Table
 CREATE TABLE article_views (
     id INT AUTO_INCREMENT PRIMARY KEY,
     article_id INT NOT NULL,
