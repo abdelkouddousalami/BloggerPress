@@ -8,26 +8,26 @@ function toggleForm() {
         formTitle.textContent = 'Sign Up';
         authForm.innerHTML = `
                 <form id="auth-form" action="connect.php" method="post">
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="role">Role</label>
-                                <select id="role" name="role" required>
-                                    <option value="visitor">Visitor</option>
-                                    <option value="author">Author</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn">Sign Up</button>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="role">Role</label>
+                                    <select id="role" name="role" required>
+                                        <option value="visitor">Visitor</option>
+                                        <option value="author">Author</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn">Sign Up</button>
                 </form>
 
                         `;
