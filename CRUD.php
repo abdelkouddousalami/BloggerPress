@@ -101,8 +101,8 @@ $connection->close();
                     <tbody>
                         <?php foreach ($articles as $article): ?>
                             <tr>
-                                <td class="border border-gray-300 p-2"><?php echo htmlspecialchars($article['title']); ?></td>
-                                <td class="border border-gray-300 p-2"><?php echo htmlspecialchars($article['content']); ?></td>
+                                <td class="border border-gray-300 p-2"><?php  echo htmlspecialchars($article['title']); ?></td>
+                                <td class="border border-gray-300 p-2"><?php  echo htmlspecialchars($article['content']); ?></td>
                                 <td class="border border-gray-300 p-2">
                                     <form method="POST" class="inline">
                                         <input type="hidden" name="id" value="<?php echo $article['id']; ?>">
