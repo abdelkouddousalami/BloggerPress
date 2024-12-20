@@ -1,7 +1,7 @@
 <?php
 session_start();
-$name = $_SESSION['name'];
-$email = $_SESSION['email'];
+ $name = $_SESSION['username'];
+ $email = $_SESSION['email'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,7 @@ $email = $_SESSION['email'];
             <div class="flex items-center space-x-4 mb-8">
                 <img src="https://via.placeholder.com/50" alt="User Avatar" class="rounded-full w-12 h-12">
                 <div>
-                    <h3 class="text-lg font-bold">Abdo</h3>
+                    <h3 class="text-lg font-bold"><?php echo $name; ?></h3>
                     <p class="text-sm text-indigo-200">Admin</p>
                 </div>
             </div>

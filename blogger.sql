@@ -37,6 +37,7 @@ CREATE TABLE stats (
 
 CREATE TABLE article_views (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    likes INT,
     article_id INT NOT NULL,
     user_id INT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
