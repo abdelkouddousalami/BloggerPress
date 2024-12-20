@@ -18,50 +18,59 @@ $connection->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloggerPress</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .animated-button:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
-    <nav class="bg-white shadow-md">
+    <nav class="bg-blue-600 shadow-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <img src="images/bloglogo-removebg-preview_1.jpg" alt="Logo" class="h-12 w-12">
-                <span class="text-2xl font-semibold text-blue-600">BloggerPress</span>
+                <span class="text-2xl font-semibold text-white">BloggerPress</span>
             </div>
-            <ul class="hidden md:flex space-x-6 text-gray-700">
-                <li><a href="index.php" class="hover:text-blue-600">Home</a></li>
-                <li><a href="#" class="hover:text-blue-600">About</a></li>
-                <li><a href="#" class="hover:text-blue-600">Contact</a></li>
+            <button class="md:hidden text-white" id="menu-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <ul class="hidden md:flex space-x-6 text-white" id="menu">
+                <li><a href="index.php" class="hover:underline">Home</a></li>
+                <li><a href="#" class="hover:underline">About</a></li>
+                <li><a href="#" class="hover:underline">Contact</a></li>
             </ul>
-            <a href="sign.php" class="bg-blue-600 text-white py-2 px-4 rounded-md shadow hover:bg-blue-700">Author Area</a>
+            <a href="sign.php" class="bg-white text-blue-600 py-2 px-4 rounded-md shadow hover:bg-gray-100 animated-button">Author Area</a>
         </div>
     </nav>
 
-    <header class="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-20">
+    <header class="bg-gradient-to-r from-blue-600 to-blue-400 text-white mx-auto px-6 py-12 w-4/5 my-6">
         <div class="container mx-auto px-6 text-center">
-            <a href="admin.php">
-                <h1 class="text-5xl font-bold mb-4">BloggerPress</h1>
-            </a>
-            <p class="text-lg">Your gateway to sharing stories, ideas, and creativity. Start blogging today with our simple, intuitive platform that puts you in control of your voice.</p>
-            <div class="mt-6 flex justify-center space-x-4">
-                <a href="sign.php" class="bg-white text-blue-600 font-medium py-2 px-6 rounded-md hover:bg-gray-100">Start Writing</a>
-                <a href="login.php" class="bg-blue-700 font-medium py-2 px-6 rounded-md hover:bg-blue-800">Join Our Community</a>
+            <h1 class="text-5xl font-bold mb-4">Welcome to BloggerPress</h1>
+            <p class="text-lg mb-6">Unleash your creativity. Share your stories. Join a community of passionate writers.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="sign.php" class="bg-white text-blue-600 font-medium py-2 px-6 rounded-md hover:bg-gray-100 animated-button">Start Writing</a>
+                <a href="login.php" class="bg-blue-700 text-white font-medium py-2 px-6 rounded-md hover:bg-blue-800 animated-button">Join Us</a>
             </div>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-8 text-center">Latest Blogs</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <main class="container mx-auto px-6 py-12 w-4/5">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-10 text-center">Blogs</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ($articles as $article): ?>
-                <div class="bg-white rounded shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                     <div class="p-6">
-                        <h2 class="text-xl font-bold mb-2 text-indigo-600 hover:underline cursor-pointer">
+                        <h3 class="text-xl font-bold mb-2 text-blue-600 hover:underline">
                             <?php echo htmlspecialchars($article['title']); ?>
-                        </h2>
+                        </h3>
                         <p class="text-gray-700 mb-4">
                             <?php echo substr(htmlspecialchars($article['content']), 0, 100) . '...'; ?>
                         </p>
-                        <p class="text-sm text-gray-500 mb-4">Written by: <?php echo htmlspecialchars($article['author']); ?></p>
-                        <a href="article.php?id=<?php echo $article['id']; ?>" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition-colors">Read More</a>
+                        <p class="text-sm text-gray-500 mb-4">Author: <?php echo htmlspecialchars($article['author']); ?></p>
+                        <a href="article.php?id=<?php echo $article['id']; ?>" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 animated-button">Read More</a>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -73,5 +82,14 @@ $connection->close();
             <p>&copy; 2024 BloggerPress. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
