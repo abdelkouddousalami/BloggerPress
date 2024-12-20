@@ -1,6 +1,6 @@
 <?php
 session_start();
-$name = $_SESSION['name'];
+$name = $_SESSION['username'];
 $email = $_SESSION['email'];
 $connection = new mysqli('localhost', 'root', '', 'BloggerPress');
 

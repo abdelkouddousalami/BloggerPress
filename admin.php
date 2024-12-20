@@ -27,7 +27,7 @@
             <div class="mt-6">
                 <p class="text-gray-700 text-sm">Email: <span class="font-medium"><?php echo "$email";?></span></p>
                 <p class="text-gray-700 text-sm">Phone: <span class="font-medium">0600000</span></p>
-                <p class="text-gray-700 text-sm">Location: <span class="font-medium">nadoor</span></p>
+                <p class="text-gray-700 text-sm">Location: <span class="font-medium">Nador</span></p>
             </div>
 
             <div class="mt-6 flex justify-center">

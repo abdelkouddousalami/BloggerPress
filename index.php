@@ -13,14 +13,12 @@ $connection->close();
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BloggerPress</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-gray-50 text-gray-900">
     <nav class="bg-white shadow-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -34,11 +32,6 @@ $connection->close();
                 <li><a href="#" class="hover:text-blue-600">Contact</a></li>
             </ul>
             <a href="sign.php" class="bg-blue-600 text-white py-2 px-4 rounded-md shadow hover:bg-blue-700">Author Area</a>
-            <button class="md:hidden text-gray-700 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
         </div>
     </nav>
 
@@ -72,7 +65,6 @@ $connection->close();
                     </div>
                 </div>
             <?php endforeach; ?>
-            
         </div>
     </main>
 
@@ -82,5 +74,4 @@ $connection->close();
         </div>
     </footer>
 </body>
-
 </html>

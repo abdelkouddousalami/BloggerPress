@@ -1,5 +1,5 @@
 <?php
-// Updated article.php for likes and comments
+session_start();
 $connection = new mysqli('localhost', 'root', '', 'BloggerPress');
 
 if ($connection->connect_error) {
@@ -8,15 +8,20 @@ if ($connection->connect_error) {
 
 $id = intval($_GET['id']);
 
-// Fetch article details
-$stmt = $connection->prepare("SELECT articles.title, articles.content, articles.created_at, articles.likes, articles.commentaire, users.username AS author FROM articles JOIN users ON articles.user_id = users.id WHERE articles.id = ?");
+$stmt = $connection->prepare("SELECT articles.title, articles.content, articles.created_at, articles.likes, articles.views, users.username AS author FROM articles JOIN users ON articles.user_id = users.id WHERE articles.id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 $article = $result->fetch_assoc();
 $stmt->close();
 
-// Handle like submission
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    $updateViews = $connection->prepare("UPDATE articles SET views = views + 1 WHERE id = ?");
+    $updateViews->bind_param("i", $id);
+    $updateViews->execute();
+    $updateViews->close();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
     $updateLikes = $connection->prepare("UPDATE articles SET likes = likes + 1 WHERE id = ?");
     $updateLikes->bind_param("i", $id);
@@ -26,17 +31,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like'])) {
     exit;
 }
 
-// Handle comment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
     $newComment = htmlspecialchars($_POST['comment_text']);
-    $updateComments = $connection->prepare("UPDATE articles SET commentaire = CONCAT(IFNULL(commentaire, ''), ?) WHERE id = ?");
-    $formattedComment = "\n- $newComment";
-    $updateComments->bind_param("si", $formattedComment, $id);
-    $updateComments->execute();
-    $updateComments->close();
+    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : NULL; 
+
+    $insertComment = $connection->prepare("INSERT INTO comments (article_id, user_id, content) VALUES (?, ?, ?)");
+    $insertComment->bind_param("iis", $id, $user_id, $newComment);
+    $insertComment->execute();
+    $insertComment->close();
     header("Location: article.php?id=$id");
     exit;
 }
+
+$stmt_comments = $connection->prepare("SELECT users.username, comments.content, comments.created_at FROM comments JOIN users ON comments.user_id = users.id WHERE comments.article_id = ? ORDER BY comments.created_at DESC");
+$stmt_comments->bind_param("i", $id);
+$stmt_comments->execute();
+$result_comments = $stmt_comments->get_result();
+$comments = $result_comments->fetch_all(MYSQLI_ASSOC);
+$stmt_comments->close();
 
 $connection->close();
 ?>
@@ -51,16 +63,15 @@ $connection->close();
 </head>
 <body class="bg-gray-100">
 
-    <!-- Header -->
     <nav class="bg-indigo-600 text-white p-4 flex justify-between">
         <a href="index.php" class="text-lg font-bold">BloggerPress</a>
     </nav>
 
-    <!-- Main Content -->
     <main class="container mx-auto py-6">
         <article class="bg-white p-6 rounded shadow">
             <h1 class="text-3xl font-bold mb-4"><?php echo htmlspecialchars($article['title']); ?></h1>
             <p class="text-gray-500 text-sm mb-6">By <?php echo htmlspecialchars($article['author']); ?> on <?php echo date("F j, Y", strtotime($article['created_at'])); ?></p>
+            <p class="text-sm text-gray-500 mb-4">Views: <?php echo $article['views']; ?></p>
             <div class="text-gray-800 leading-relaxed mb-4">
                 <?php echo nl2br(htmlspecialchars($article['content'])); ?>
             </div>
@@ -71,7 +82,17 @@ $connection->close();
             </div>
             <div class="mb-6">
                 <h2 class="text-xl font-bold mb-2">Comments:</h2>
-                <pre class="bg-gray-100 p-4 rounded"><?php echo htmlspecialchars($article['commentaire']); ?></pre>
+                <?php if (count($comments) > 0): ?>
+                    <?php foreach ($comments as $comment): ?>
+                        <div class="mb-4">
+                            <p class="text-sm font-semibold"><?php echo htmlspecialchars($comment['username']); ?> says:</p>
+                            <pre class="bg-gray-100 p-4 rounded"><?php echo nl2br(htmlspecialchars($comment['content'])); ?></pre>
+                            <p class="text-xs text-gray-500">Posted on <?php echo date("F j, Y", strtotime($comment['created_at'])); ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No comments yet. Be the first to comment!</p>
+                <?php endif; ?>
                 <form method="post" class="mt-4">
                     <textarea name="comment_text" class="w-full border rounded p-2" placeholder="Add a comment..." required></textarea>
                     <button type="submit" name="comment" class="bg-green-500 text-white px-4 py-2 rounded mt-2">Submit</button>
@@ -80,7 +101,6 @@ $connection->close();
         </article>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-indigo-600 text-white text-center py-4">
         <p>&copy; 2024 BloggerPress. All Rights Reserved.</p>
     </footer>
