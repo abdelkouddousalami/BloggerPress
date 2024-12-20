@@ -1,78 +1,51 @@
+<?php
+$connection = new mysqli('localhost', 'root', '', 'BloggerPress');
+
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+$id = intval($_GET['id']);
+$stmt = $connection->prepare("SELECT articles.title, articles.content, articles.created_at, users.username AS author FROM articles JOIN users ON articles.user_id = users.id WHERE articles.id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$article = $result->fetch_assoc();
+$stmt->close();
+
+$connection->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article</title>
-    <link rel="stylesheet" href="article.css">
+    <title><?php echo htmlspecialchars($article['title']); ?></title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-100">
 
-<body>
-    <nav>
-        <div class="logo">
-            <img src="images/bloglogo-removebg-preview_1.jpg" alt="">
-        </div>
-        <ul class="nav-links">
-            <a href="index.php">
-                <li>Home</li>
-            </a>
-            <li>About</li>
-            <li>Contact</li>
-        </ul>
-        <a href="sign.php">
-            <div class="login">
-                Author Area
-            </div>
-        </a>
+    <!-- Header -->
+    <nav class="bg-indigo-600 text-white p-4 flex justify-between">
+        <a href="index.php" class="text-lg font-bold">BloggerPress</a>
     </nav>
-    <main>
-        <section class="part1">
-                <section class="head">
-                    <h1>THE WORLD IN 2100</h1>
-                    <img src="images/travel-blogger-800x450.jpg" alt="A futuristic world in 2100" class="header-image">
-                </section>
-                <section class="article">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem omnis quod, repellendus ipsum perspiciatis accusamus expedita, saepe, nihil nobis odio eos perferendis. Fuga nisi neque ad earum ut, quia iste harum placeat officia debitis totam consequuntur quibusdam a? Exercitationem iusto ipsum aut veniam nulla debitis similique at aliquid cum suscipit iure maxime, voluptatibus assumenda veritatis aliquam modi libero accusantium, velit saepe ducimus voluptas non quas ad? Saepe, quibusdam, pariatur reprehenderit alias recusandae numquam quasi eligendi exercitationem porro iusto deleniti, minima consequuntur mollitia? Culpa repellat quaerat esse possimus, quisquam doloribus et corrupti cum reiciendis ipsum at laborum odit minima cupiditate quas. Lorem ipsum dolor sit amet consectetur, adipisicing elit. At exercitationem corrupti enim dolor sed vero labore quis non! Porro dignissimos ipsum maiores libero ratione vel officiis eveniet? Dolore in distinctio laborum ullam asperiores praesentium quia sed et aperiam? Sequi harum assumenda animi ratione, autem quo commodi deserunt ea nulla quis aliquam dignissimos temporibus dolores enim suscipit? Velit non cum labore vero molestiae, exercitationem saepe eveniet quo consectetur incidunt nobis nemo numquam adipisci est quam corporis suscipit quas quibusdam facere consequuntur, omnis fugiat tempora. Inventore dolorem labore itaque earum nisi similique, molestiae soluta quia exercitationem vel assumenda alias voluptates quo mollitia repellendus! Nulla a repellendus ipsum, itaque non at harum veritatis ad, fugit impedit debitis facere totam, tenetur maxime. Deleniti nulla vero numquam asperiores esse, ducimus sequi accusamus corrupti iure similique! Asperiores nemo porro laboriosam nihil ipsa nobis odit, eligendi ratione tenetur praesentium minus, modi dicta, voluptatum cupiditate? Tempore velit odio, dolore laudantium ipsum, aut ea doloremque quasi, maxime rerum perferendis fugiat? Inventore incidunt consectetur sunt, id ipsum, sit dolorem cupiditate saepe illo laboriosam culpa repellat, voluptas velit amet cum! Iste ratione autem, veniam numquam ducimus, qui quia aperiam earum culpa consequatur dolore sunt odit obcaecati quis atque adipisci, perspiciatis animi?</p>
-                </section>
-        </section>
-        <section class="part2">
-            <h1>More Article</h1>
-            <div class="articl">
-                <img src="images/more.png" alt="">
-                <h3>Trip With Familly</h3>
-                <p>When you want to trip ... .</p>
-                <h5>Writted By : Abdelkouddous</h5>
-            </div> 
-            <div class="articl">
-                <img src="images/more.png" alt="">
-                <h3>Trip With Familly</h3>
-                <p>When you want to trip ... .</p>
-                <h5>Writted By : Abdelkouddous</h5>
-            </div> 
-            <div class="articl">
-                <img src="images/more.png" alt="">
-                <h3>Trip With Familly</h3>
-                <p>When you want to trip ... .</p>
-                <h5>Writted By : Abdelkouddous</h5>
-            </div> 
-            <div class="articl">
-                <img src="images/more.png" alt="">
-                <h3>Trip With Familly</h3>
-                <p>When you want to trip ... .</p>
-                <h5>Writted By : Abdelkouddous</h5>
-            </div> 
-            <div class="articl">
-                <img src="images/more.png" alt="">
-                <h3>Trip With Familly</h3>
-                <p>When you want to trip ... .</p>
-                <h5>Writted By : Abdelkouddous</h5>
-            </div> 
-             
-        </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-6">
+        <article class="bg-white p-6 rounded shadow">
+            <h1 class="text-3xl font-bold mb-4"><?php echo htmlspecialchars($article['title']); ?></h1>
+            <p class="text-gray-500 text-sm mb-6">By <?php echo htmlspecialchars($article['author']); ?> on <?php echo date("F j, Y", strtotime($article['created_at'])); ?></p>
+            <div class="text-gray-800 leading-relaxed">
+                <?php echo nl2br(htmlspecialchars($article['content'])); ?>
+            </div>
+        </article>
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-indigo-600 text-white text-center py-4">
+        <p>&copy; 2024 BloggerPress. All Rights Reserved.</p>
+    </footer>
 
 </body>
-
 </html>
