@@ -33,22 +33,25 @@ $connection->close();
 
 <body class="bg-gray-100 min-h-screen">
     <div class="flex flex-col md:flex-row">
-        <aside class="w-full md:w-1/4 bg-indigo-600 text-white h-screen p-6">
-            <div class="flex items-center space-x-4 mb-8">
-                <img src="https://via.placeholder.com/50" alt="User Avatar" class="rounded-full w-12 h-12">
-                <div>
-                    <h3 class="text-lg font-bold"><?php echo $name; ?></h3>
-                    <p class="text-sm text-indigo-200">Admin</p>
-                </div>
-            </div>
-            <h2 class="text-2xl font-bold mb-8">Dashboard</h2>
-            <nav class="space-y-4">
-                <a href="#statistics" class="block py-2 px-4 rounded hover:bg-indigo-700">Statistiques</a>
-                <a href="CRUD.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Ajouter un article</a>
-                <a href="CRUD.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Gestion des articles</a>
-                <a href="#visualization" class="block py-2 px-4 rounded hover:bg-indigo-700">Visualisation des données</a>
-            </nav>
-        </aside>
+    <aside class="w-full md:w-1/4 bg-indigo-600 text-white h-screen p-6">
+    <div class="flex items-center space-x-4 mb-8">
+        <img src="https://via.placeholder.com/50" alt="User Avatar" class="rounded-full w-12 h-12">
+        <div>
+            <h3 class="text-lg font-bold"><?php echo $name; ?></h3>
+            <p class="text-sm text-indigo-200">Admin</p>
+        </div>
+    </div>
+    <h2 class="text-2xl font-bold mb-8">Dashboard</h2>
+    <nav class="space-y-4">
+        <a href="#statistics" class="block py-2 px-4 rounded hover:bg-indigo-700">Statistiques</a>
+        <a href="CRUD.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Ajouter un article</a>
+        <a href="CRUD.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Gestion des articles</a>
+        <a href="#visualization" class="block py-2 px-4 rounded hover:bg-indigo-700">Visualisation des données</a>
+        <!-- Log Out Link -->
+        <a href="logout.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Log Out</a>
+    </nav>
+</aside>
+
 
         <main class="flex-1 p-6">
             <section id="statistics" class="mb-12">
@@ -90,7 +93,6 @@ $connection->close();
             }]
         };
 
-        
         const ctx = document.getElementById('statsChart').getContext('2d');
         const statsChart = new Chart(ctx, {
             type: 'bar',
