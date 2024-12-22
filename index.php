@@ -5,7 +5,14 @@ if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 
-$result = $connection->query("SELECT articles.id, articles.title, articles.content, users.username AS author FROM articles JOIN users ON articles.user_id = users.id ORDER BY articles.created_at DESC");
+$searchQuery = "";
+if (isset($_GET['query'])) {
+    $searchQuery = $connection->real_escape_string($_GET['query']);
+    $result = $connection->query("SELECT articles.id, articles.title, articles.content, users.username AS author FROM articles JOIN users ON articles.user_id = users.id WHERE articles.title LIKE '%$searchQuery%' OR articles.content LIKE '%$searchQuery%' ORDER BY articles.created_at DESC");
+} else {
+    $result = $connection->query("SELECT articles.id, articles.title, articles.content, users.username AS author FROM articles JOIN users ON articles.user_id = users.id ORDER BY articles.created_at DESC");
+}
+
 $articles = $result->fetch_all(MYSQLI_ASSOC);
 
 $connection->close();
@@ -58,6 +65,14 @@ $connection->close();
     </header>
 
     <main class="container mx-auto px-6 py-12 w-4/5">
+        <section id="search" class="mb-10">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Search for Articles</h2>
+            <form action="index.php" method="GET" class="flex items-center justify-center">
+                <input type="text" name="query" placeholder="Search articles..." value="<?php echo htmlspecialchars($searchQuery); ?>" class="flex-1 p-2 rounded-l bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600">
+                <button type="submit" class="p-2 bg-purple-700 text-white rounded-r hover:bg-purple-800 animated-button">Search</button>
+            </form>
+        </section>
+
         <h2 class="text-3xl font-semibold text-gray-800 mb-10 text-center">Blogs</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ($articles as $article): ?>

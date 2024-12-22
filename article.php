@@ -68,37 +68,43 @@ $connection->close();
     </nav>
 
     <main class="container mx-auto py-6">
-        <article class="bg-white p-6 rounded shadow">
-            <h1 class="text-3xl font-bold mb-4"><?php echo htmlspecialchars($article['title']); ?></h1>
-            <p class="text-gray-500 text-sm mb-6">By <?php echo htmlspecialchars($article['author']); ?> on <?php echo date("F j, Y", strtotime($article['created_at'])); ?></p>
-            <p class="text-sm text-gray-500 mb-4">Views: <?php echo $article['views']; ?></p>
-            <div class="text-gray-800 leading-relaxed mb-4">
-                <?php echo nl2br(htmlspecialchars($article['content'])); ?>
-            </div>
-            <div class="mb-4">
-                <form method="post">
-                    <button type="submit" name="like" class="bg-blue-500 text-white px-4 py-2 rounded">Like (<?php echo $article['likes']; ?>)</button>
-                </form>
-            </div>
-            <div class="mb-6">
-                <h2 class="text-xl font-bold mb-2">Comments:</h2>
-                <?php if (count($comments) > 0): ?>
-                    <?php foreach ($comments as $comment): ?>
-                        <div class="mb-4">
-                            <p class="text-sm font-semibold"><?php echo htmlspecialchars($comment['username']); ?> says:</p>
-                            <pre class="bg-gray-100 p-4 rounded"><?php echo nl2br(htmlspecialchars($comment['content'])); ?></pre>
-                            <p class="text-xs text-gray-500">Posted on <?php echo date("F j, Y", strtotime($comment['created_at'])); ?></p>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>No comments yet. Be the first to comment!</p>
-                <?php endif; ?>
-                <form method="post" class="mt-4">
-                    <textarea name="comment_text" class="w-full border rounded p-2" placeholder="Add a comment..." required></textarea>
-                    <button type="submit" name="comment" class="bg-green-500 text-white px-4 py-2 rounded mt-2">Submit</button>
-                </form>
-            </div>
-        </article>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <article class="md:col-span-2 bg-white p-6 rounded shadow">
+                <h1 class="text-3xl font-bold mb-4"><?php echo htmlspecialchars($article['title']); ?></h1>
+                <p class="text-gray-500 text-sm mb-6">By <?php echo htmlspecialchars($article['author']); ?> on <?php echo date("F j, Y", strtotime($article['created_at'])); ?></p>
+                <div class="text-gray-800 leading-relaxed mb-4">
+                    <?php echo nl2br(htmlspecialchars($article['content'])); ?>
+                </div>
+            </article>
+            <aside class="bg-white p-6 rounded shadow">
+                <div class="mb-4">
+                    <form method="post">
+                        <button type="submit" name="like" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Like (<?php echo $article['likes']; ?>)</button>
+                    </form>
+                </div>
+                <div class="mb-6">
+                    <p class="text-gray-500 text-sm">Views: <?php echo $article['views']; ?></p>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold mb-2">Comments:</h2>
+                    <?php if (count($comments) > 0): ?>
+                        <?php foreach ($comments as $comment): ?>
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold"><?php echo htmlspecialchars($comment['username']); ?> says:</p>
+                                <pre class="bg-gray-100 p-4 rounded"><?php echo nl2br(htmlspecialchars($comment['content'])); ?></pre>
+                                <p class="text-xs text-gray-500">Posted on <?php echo date("F j, Y", strtotime($comment['created_at'])); ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No comments yet. Be the first to comment!</p>
+                    <?php endif; ?>
+                    <form method="post" class="mt-4">
+                        <textarea name="comment_text" class="w-full border rounded p-2" placeholder="Add a comment..." required></textarea>
+                        <button type="submit" name="comment" class="bg-green-500 text-white px-4 py-2 rounded mt-2">Submit</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
     </main>
 
     <footer class="bg-indigo-600 text-white text-center py-4">

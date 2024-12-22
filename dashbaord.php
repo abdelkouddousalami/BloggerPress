@@ -1,14 +1,19 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
+
 $name = $_SESSION['username'];
-$email = $_SESSION['email'];
 
 $connection = new mysqli('localhost', 'root', '', 'BloggerPress');
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 
-$query = "SELECT SUM(views) AS total_views, SUM(likes) AS total_likes, 
+$query = "SELECT SUM(views) AS total_views, SUM(likes) AS total_likes,
                  SUM(LENGTH(commentaire) - LENGTH(REPLACE(commentaire, '\n', '')) + 1) AS total_comments
           FROM articles";
 $result = $connection->query($query);
@@ -31,27 +36,25 @@ $connection->close();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen">
-    <div class="flex flex-col md:flex-row">
-    <aside class="w-full md:w-1/4 bg-indigo-600 text-white h-screen p-6">
-    <div class="flex items-center space-x-4 mb-8">
-        <img src="https://via.placeholder.com/50" alt="User Avatar" class="rounded-full w-12 h-12">
-        <div>
-            <h3 class="text-lg font-bold"><?php echo $name; ?></h3>
-            <p class="text-sm text-indigo-200">Admin</p>
-        </div>
-    </div>
-    <h2 class="text-2xl font-bold mb-8">Dashboard</h2>
-    <nav class="space-y-4">
-        <a href="#statistics" class="block py-2 px-4 rounded hover:bg-indigo-700">Statistiques</a>
-        <a href="CRUD.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Ajouter un article</a>
-        <a href="CRUD.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Gestion des articles</a>
-        <a href="#visualization" class="block py-2 px-4 rounded hover:bg-indigo-700">Visualisation des données</a>
-        <!-- Log Out Link -->
-        <a href="logout.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Log Out</a>
-    </nav>
-</aside>
-
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <div class="flex flex-1">
+        <aside class="w-full md:w-1/4 bg-indigo-600 text-white h-screen p-6">
+            <div class="flex items-center space-x-4 mb-8">
+                <img src="https://via.placeholder.com/50" alt="User Avatar" class="rounded-full w-12 h-12">
+                <div>
+                    <h3 class="text-lg font-bold"><?php echo $name; ?></h3>
+                    <p class="text-sm text-indigo-200">Admin</p>
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold mb-8">Dashboard</h2>
+            <nav class="space-y-4">
+                <a href="#statistics" class="block py-2 px-4 rounded hover:bg-indigo-700">Statistiques</a>
+                <a href="CRUD.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Ajouter un article</a>
+                <a href="CRUD.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Gestion des articles</a>
+                <a href="#visualization" class="block py-2 px-4 rounded hover:bg-indigo-700">Visualisation des données</a>
+                <a href="logout.php" class="block py-2 px-4 rounded hover:bg-indigo-700">Log Out</a>
+            </nav>
+        </aside>
 
         <main class="flex-1 p-6">
             <section id="statistics" class="mb-12">
@@ -80,6 +83,18 @@ $connection->close();
             </section>
         </main>
     </div>
+
+    <footer class="bg-indigo-600 text-white p-6 mt-8">
+        <div class="flex justify-between items-center">
+            <div>
+                <p class="font-semibold">Author: <?php echo $name; ?></p>
+                <p class="text-sm">BloggerPress Platform</p>
+            </div>
+            <div>
+                <p class="text-sm">© 2024 BloggerPress. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         const data = {
